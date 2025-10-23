@@ -47,11 +47,9 @@ if [ ! -f .env ]; then\n\
     cp .env.example .env\n\
 fi\n\
 \n\
-# Generate application key if not set\n\
-if grep -q "APP_KEY=$" .env || ! grep -q "APP_KEY=" .env; then\n\
-    echo "Generating application key..."\n\
-    php artisan key:generate --force\n\
-fi\n\
+# Always generate application key to ensure it exists\n\
+echo "Generating application key..."\n\
+php artisan key:generate --force\n\
 \n\
 # Wait for database\n\
 echo "Waiting for database..."\n\
